@@ -66,18 +66,30 @@ public class CekGanjilGenap extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(13, 20, 13, 20);
         jPanel1.add(jButton1, gridBagConstraints);
 
-        jTextField1.setColumns(10);
+        jTextField1.setColumns(15);
+        jTextField1.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jTextField1FocusGained(evt);
+            }
+        });
+        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField1ActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 0;
-        gridBagConstraints.insets = new java.awt.Insets(13, 20, 13, 20);
+        gridBagConstraints.insets = new java.awt.Insets(18, 0, 18, 0);
         jPanel1.add(jTextField1, gridBagConstraints);
 
+        jLabel3.setFont(new java.awt.Font("Segoe UI Light", 0, 12)); // NOI18N
         jLabel3.setText("COKE IS GOOD");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 1;
-        gridBagConstraints.insets = new java.awt.Insets(14, 37, 14, 37);
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.BASELINE;
+        gridBagConstraints.insets = new java.awt.Insets(14, 82, 14, 82);
         jPanel1.add(jLabel3, gridBagConstraints);
 
         getContentPane().add(jPanel1, java.awt.BorderLayout.CENTER);
@@ -88,15 +100,40 @@ public class CekGanjilGenap extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
     try {
     int angka = Integer.parseInt(jTextField1.getText());
+    String hasil = "Angka " + angka;
+    
     if (angka %2 == 0) {
-        jLabel3.setText("Angka "+ angka + " adalah Genap.");
+        hasil +=(" adalah Genap");
     } else
-        jLabel3.setText("Angka " + angka + " adalah Ganjil.");
+        hasil +=(" adalah Ganjil");
+
+    if (isPrime(angka)) {
+        hasil += " dan juga Bilangan Prima";
+    } else {
+        hasil += " dan bukan Bilangan Prima";
+    }
+        jLabel3.setText(hasil);
+        JOptionPane.showMessageDialog(this, hasil, " Hasil", JOptionPane.INFORMATION_MESSAGE);
     } catch (NumberFormatException e) {
         JOptionPane.showMessageDialog(this,"Masukkan Angka yang valid.", "Eror"
         , JOptionPane.ERROR_MESSAGE);
     }
+    }
+    private boolean isPrime(int number) {
+        if (number <= 1) return false;
+        for (int i = 2; i <= Math.sqrt(number); i++){
+            if (number % i == 0 ) return false;
+        }
+        return true;
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    
+    }//GEN-LAST:event_jTextField1ActionPerformed
+
+    private void jTextField1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField1FocusGained
+    jTextField1.setText("");        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField1FocusGained
 
     /**
      * @param args the command line arguments
